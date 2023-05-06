@@ -1,0 +1,25 @@
+package udv.compi;
+
+import java_cup.runtime.*;
+
+class Parser;
+
+terminal LLA, LLC, CA, CC, DP, COMMA, COMILLA, PLUS, PRO;
+terminal String VAL, ID;
+terminal String NUM;
+
+non terminal Integer S, L, LP, V, E, T, F;
+
+start with S;
+
+S ::= E:e{: System.out.println(e); :};
+E ::= E:e1 PLUS T:t{: RESULT = e1 + t; :}
+	|T:t{: RESULT = t; :};
+
+T ::= T:t1 PRO F:f{: RESULT = t1 * f; :}
+	|F:f{: RESULT = f; :};
+	
+F ::= NUM:n {: RESULT = Integer.parseInt(n);:}
+	|CA E:e CC {: RESULT = e; :};
+			
+	
